@@ -1,6 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:labtask/pages/forecastpage.dart';
+import 'package:labtask/pages/welcomepage.dart';
 
-import 'mainpage.dart';
+void main() => myApp();
 
-void main() => runApp(const MaterialApp(home: MainPage()));
+void myApp() => runApp(
+      MaterialApp(
+        home: WelcomePage(),
+      ),
+    );
