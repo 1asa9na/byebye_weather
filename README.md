@@ -1,16 +1,11 @@
-# labtask
+# Flutter
 
-A new Flutter project.
+Задание
 
-## Getting Started
+- Реализовать мобильное приложение аналогичное Hello Weather [https://helloweather.com](https://helloweather.com/)
+- Раздел Radar реализовывать не нужно
+- API для получения прогноза погоды – [https://openweathermap.org](https://openweathermap.org/)
+- Графические иконки – [https://365webresources.com/weather-icon-sets-shouldnt-miss/](https://365webresources.com/weather-icon-sets-shouldnt-miss/)
+- Срок выполнения – две недели
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Успехов!
