@@ -1,11 +1,33 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../models/dailyforecast.dart';
 
 class DailyForecastBloc extends Bloc<DFEvent, DFState> {
-  DailyForecastBloc() : super(DFInitialState());
+  DailyForecastBloc()
+      : super(DailyForecast(
+            'sun', 'Ясно', DateTime.now(), 10, 20, 0, 50, 1100, 0)) {
+    on<DFEvent>((event, emit) => emit(DailyForecast.fromJson(
+        jsonDecode(event.prefs.getString('daily')!)[event.index])));
+  }
 }
 
-abstract class DFEvent {}
+class DFEvent {
+  final int index;
+  final SharedPreferences prefs;
 
-abstract class DFState {}
+  DFEvent(this.index, this.prefs) {}
+}
 
-class DFInitialState extends DFState {}
+abstract class DFState {
+  get forecastImage;
+  get forecastWord;
+  get date;
+  get temperatureMin;
+  get temperatureMax;
+  get windSpeed;
+  get humidity;
+  get pressure;
+  get probability;
+}

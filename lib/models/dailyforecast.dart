@@ -24,13 +24,13 @@ class DailyForecast extends DFState {
       this.probability);
 
   factory DailyForecast.fromJson(Map json) => DailyForecast(
-      WeatherCodeMap.weatherImage[json['values']['weatherCode']]!,
-      WeatherCodeMap.weatherCode[json['values']['weatherCode']]!,
-      DateTime.parse(json['time']!),
-      json['values']['temperatureMin']!.round(),
-      json['values']['temperatureMax']!.round(),
-      json['values']['windSpeedAvg']!.round(),
-      json['values']['humidityAvg']!.round(),
-      json['pressureSurfaceLevelAvg']!.round(),
-      json['values']['precipitationProbabilityAvg']!.round());
+      WeatherCodeMap.weatherImage[json['values']['weatherCode']] ?? 'sun',
+      WeatherCodeMap.weatherCode[json['values']['weatherCode']] ?? 'Солнечно',
+      DateTime.parse(json['time'] ?? DateTime.now()),
+      (json['values']['temperatureMin'] ?? 10).round(),
+      (json['values']['temperatureMax'] ?? 20).round(),
+      (json['values']['windSpeedAvg'] ?? 0).round(),
+      (json['values']['humidityAvg'] ?? 50).round(),
+      (json['pressureSurfaceLevelAvg'] ?? 1100).round(),
+      (json['values']['precipitationProbabilityAvg'] ?? 0).round());
 }
