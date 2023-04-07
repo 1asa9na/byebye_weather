@@ -10,15 +10,6 @@ class DailyForecastListWidget extends StatelessWidget {
   final SharedPreferences prefs;
   const DailyForecastListWidget(this.prefs, {super.key});
 
-  int getSumOfTs(SharedPreferences prefs, int length) {
-    int sum = 0;
-    final List<dynamic> json = jsonDecode(prefs.getString('daily')!);
-    for (int i = 0; i < length; i++) {
-      sum = sum + json[i]['values']['temperatureMax'].round() as int;
-    }
-    return sum;
-  }
-
   @override
   Widget build(BuildContext context) {
     int listLength = jsonDecode(prefs.getString('daily')!).length;
@@ -35,7 +26,13 @@ class DailyForecastListWidget extends StatelessWidget {
           itemBuilder: (context, index) => BlocProvider<DailyForecastBloc>(
             create: (BuildContext context) =>
                 DailyForecastBloc()..add(DFEvent(index, prefs)),
-            child: DailyForecastItem(index, getSumOfTs(prefs, listLength)),
+            child: DailyForecastItem(
+              index,
+              jsonDecode(prefs.getString('daily')!)
+                  .map((e) => e['values']['temperatureMax'].round())
+                  .toList()
+                  .cast<int>(),
+            ),
           ),
         ),
       ),

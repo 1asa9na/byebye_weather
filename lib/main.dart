@@ -28,6 +28,7 @@ void myApp() async {
 
 Future<void> initApp(SharedPreferences prefs) async {
   final String lastDate = prefs.getString('lastDate') ?? '1970-01-01T00:00:00Z';
+  prefs.setString('district', "NEWYORK, 不忍通り, 千駄木三丁目, 文京区, 東京都, 113-0022, 日本");
   if (DateTime.now().difference(DateTime.parse(lastDate)).inHours.abs() >= 1) {
     final apikey = await FlutterConfig.get('APIKEY');
     final loc = await getLocation();
@@ -38,6 +39,8 @@ Future<void> initApp(SharedPreferences prefs) async {
     prefs.setString(
         'daily', jsonEncode(jsonDecode(response)['timelines']['daily']));
     prefs.setString('lastDate', DateTime.now().toString());
+    prefs.setString(
+        'district', jsonEncode(jsonDecode(response)['location']["name"]));
   }
 }
 

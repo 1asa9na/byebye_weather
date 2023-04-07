@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppBarContainer extends StatelessWidget {
-  const AppBarContainer({super.key});
+  final SharedPreferences prefs;
+  const AppBarContainer(this.prefs, {super.key});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -19,7 +21,7 @@ class AppBarContainer extends StatelessWidget {
         child: FlexibleSpaceBar(
           centerTitle: true,
           title: Text(
-            "Omsk",
+            prefs.getString('district')!.split(', ')[0],
             style: GoogleFonts.montserrat(fontSize: 18),
           ),
         ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,8 +9,8 @@ import '../models/weathercodemap.dart';
 
 class DailyForecastItem extends StatelessWidget {
   final int index;
-  final int sumOfTs;
-  const DailyForecastItem(this.index, this.sumOfTs, {super.key});
+  final List<int> ts;
+  const DailyForecastItem(this.index, this.ts, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +87,10 @@ class DailyForecastItem extends StatelessWidget {
                 children: [
                   Container(
                       height: 35,
-                      width: 80 + 40 * (state.temperatureMax.round()) / sumOfTs,
+                      width: 80 +
+                          20 *
+                              (state.temperatureMax.round() - ts.reduce(min)) /
+                              ts.map((e) => e - ts.reduce(min)).reduce(max),
                       decoration: const BoxDecoration(
                         borderRadius:
                             BorderRadius.horizontal(right: Radius.circular(5)),

@@ -7,8 +7,6 @@ class HourlyForecastBloc extends Bloc<HFEvent, HFState> {
   HourlyForecastBloc()
       : super(HourlyForecast('sun', 'Ясно', DateTime.now(), 20)) {
     on<HFEvent>((event, emit) {
-      print(jsonEncode(
-          jsonDecode(event.prefs.getString('hourly')!)[event.index]));
       return emit(HourlyForecast.fromJson(
           jsonDecode(event.prefs.getString('hourly')!)[event.index]));
     });
