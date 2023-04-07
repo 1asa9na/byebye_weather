@@ -39,7 +39,7 @@ class ForecastPage extends StatelessWidget {
                         thickness: 2,
                       ),
                     ),
-                    const HourlyForecastListWidget(),
+                    HourlyForecastListWidget(prefs),
                     const Padding(
                       padding: EdgeInsets.all(10),
                       child: Divider(

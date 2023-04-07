@@ -4,15 +4,15 @@ import 'package:labtask/models/weathercodemap.dart';
 class HourlyForecast extends HFState {
   String forecastImage;
   String forecastWord;
-  int hoursOfDay;
+  DateTime date;
   int temperature;
 
   HourlyForecast(
-      this.forecastImage, this.forecastWord, this.hoursOfDay, this.temperature);
+      this.forecastImage, this.forecastWord, this.date, this.temperature);
 
   factory HourlyForecast.fromJson(Map json) => HourlyForecast(
-      WeatherCodeMap.weatherImage[json['values']['weatherCode']]!,
-      WeatherCodeMap.weatherCode[json['values']['weatherCode']]!,
-      DateTime.parse(json['time']!).hour,
-      json['values']['temperature']!.round());
+      WeatherCodeMap.weatherImage[json['values']['weatherCode'].toString()]!,
+      WeatherCodeMap.weatherCode[json['values']['weatherCode'].toString()]!,
+      DateTime.parse(json['time'] ?? DateTime.now().toString()),
+      (json['values']['temperature'] ?? 20.0).round());
 }

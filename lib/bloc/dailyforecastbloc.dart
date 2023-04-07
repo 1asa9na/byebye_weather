@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/dailyforecast.dart';
@@ -17,7 +16,7 @@ class DFEvent {
   final int index;
   final SharedPreferences prefs;
 
-  DFEvent(this.index, this.prefs) {}
+  DFEvent(this.index, this.prefs);
 }
 
 abstract class DFState {

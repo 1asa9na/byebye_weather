@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:labtask/bloc/dailyforecastbloc.dart';
-
 import '../models/weathercodemap.dart';
 
 class DailyForecastItem extends StatelessWidget {
@@ -70,7 +70,7 @@ class DailyForecastItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${state.date.day}.${state.date.month}",
+                    DateFormat('dd.MM').format(state.date),
                     style: GoogleFonts.montserrat(
                       fontSize: 9,
                       color: const Color(0xFF577CAE),

@@ -23,14 +23,18 @@ class DailyForecast extends DFState {
       this.pressure,
       this.probability);
 
-  factory DailyForecast.fromJson(Map json) => DailyForecast(
-      WeatherCodeMap.weatherImage[json['values']['weatherCode']] ?? 'sun',
-      WeatherCodeMap.weatherCode[json['values']['weatherCode']] ?? 'Солнечно',
-      DateTime.parse(json['time'] ?? DateTime.now()),
-      (json['values']['temperatureMin'] ?? 10).round(),
-      (json['values']['temperatureMax'] ?? 20).round(),
-      (json['values']['windSpeedAvg'] ?? 0).round(),
-      (json['values']['humidityAvg'] ?? 50).round(),
-      (json['pressureSurfaceLevelAvg'] ?? 1100).round(),
-      (json['values']['precipitationProbabilityAvg'] ?? 0).round());
+  factory DailyForecast.fromJson(Map json) {
+    return DailyForecast(
+        WeatherCodeMap
+            .weatherImage[json['values']['weatherCodeMax'].toString()]!,
+        WeatherCodeMap
+            .weatherCode[json['values']['weatherCodeMax'].toString()]!,
+        DateTime.parse(json['time'] ?? DateTime.now().toString()),
+        (json['values']['temperatureMin'] ?? 10).round(),
+        (json['values']['temperatureMax'] ?? 20).round(),
+        (json['values']['windSpeedAvg'] ?? 0).round(),
+        (json['values']['humidityAvg'] ?? 50).round(),
+        (json['values']['pressureSurfaceLevelAvg'] ?? 1100).round(),
+        (json['values']['precipitationProbabilityAvg'] ?? 0).round());
+  }
 }
