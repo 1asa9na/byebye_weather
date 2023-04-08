@@ -1,16 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:labtask/main.dart';
 import 'package:labtask/widgets/appbarcontainer.dart';
 import 'package:labtask/widgets/bottomnavigationbarcontainer.dart';
 import 'package:labtask/widgets/dailyforecastlistwidget.dart';
 import 'package:labtask/widgets/hourlyforecastlistwidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../initapp.dart';
 import '../models/weathercodemap.dart';
 
 class ForecastPage extends StatelessWidget {
@@ -48,7 +47,7 @@ class ForecastPage extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          await initApp(prefs);
+          await initApp(prefs, await getCurrentLocation());
         },
         child: CustomScrollView(
           slivers: [
@@ -81,7 +80,7 @@ class ForecastPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      'На этой неделе ${WeatherCodeMap.weatherCode[thekey]}, средняя температура ${list.reduce((a, b) => a + b) / list.length}°, самый тёплый день ${WeatherCodeMap.daysOfWeekLong[DateTime.parse(jsonDecode(prefs.getString('daily')!)[hottest]['time']).weekday]} с температурой ${list.reduce(max)}°',
+                      'На этой неделе ${WeatherCodeMap.weatherCode[thekey]}, средняя температура ${(list.reduce((a, b) => a + b) / list.length).round()}°, самый тёплый день ${WeatherCodeMap.daysOfWeekLong[DateTime.parse(jsonDecode(prefs.getString('daily')!)[hottest]['time']).weekday]} с температурой ${list.reduce(max)}°',
                       style: GoogleFonts.montserrat(
                           fontSize: 18, color: const Color(0xFF577CAE)),
                     ),
@@ -94,6 +93,20 @@ class ForecastPage extends StatelessWidget {
                     ),
                   ),
                   DailyForecastListWidget(prefs),
+                  const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Divider(
+                      color: Color.fromARGB(25, 0, 0, 0),
+                      thickness: 2,
+                    ),
+                  ),
+                  Text(
+                    "Создано с помощью Tomorrow.io",
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.montserrat(
+                        fontSize: 16, color: const Color(0xFF577CAE)),
+                  ),
                 ],
               ),
             ),
