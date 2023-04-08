@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:labtask/widgets/nowforecastbuilder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../bloc/hourlyforecastbloc.dart';
 
 class AppBarContainer extends StatelessWidget {
   final SharedPreferences prefs;
@@ -22,39 +26,10 @@ class AppBarContainer extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: FlexibleSpaceBar(
-          background: SizedBox(
-            height: 200,
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Image.asset('assets/main_icons/sun.png'),
-                ),
-                const Spacer(),
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '17°',
-                            style: GoogleFonts.montserrat(
-                                fontSize: 40, color: Colors.white),
-                          ),
-                          Text(
-                            'Облачно',
-                            style: GoogleFonts.montserrat(
-                                fontSize: 20, color: Colors.white),
-                          ),
-                        ]),
-                  ),
-                ),
-              ],
-            ),
+          background: BlocProvider<HourlyForecastBloc>(
+            create: (BuildContext context) =>
+                HourlyForecastBloc()..add(HFEvent(0, prefs)),
+            child: NowForecastBuilder(),
           ),
           centerTitle: true,
           title: Text(

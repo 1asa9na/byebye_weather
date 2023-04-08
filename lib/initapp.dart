@@ -52,8 +52,6 @@ Future<void> initApp(SharedPreferences prefs, String? location) async {
         'hourly', jsonEncode(jsonDecode(response)['timelines']['hourly']));
     prefs.setString(
         'daily', jsonEncode(jsonDecode(response)['timelines']['daily']));
-    prefs.setString(
-        'minutely', jsonEncode(jsonDecode(response)['timelines']['minutely']));
     prefs.setString('lastDate', DateTime.now().toString());
   }
 }

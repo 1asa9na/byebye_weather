@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:labtask/bloc/hourlyforecastbloc.dart';
 
 class HourlyForecastItem extends StatelessWidget {
-  final index;
+  final int index;
   const HourlyForecastItem(this.index, {super.key});
 
   @override

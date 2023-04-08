@@ -72,4 +72,31 @@ class WeatherCodeMap {
     6: 'суббота',
     7: 'воскресенье'
   };
+
+  static final weatherMainImage = {
+    "0": "cloud",
+    "1000": "",
+    "1100": "",
+    "1101": "cloud",
+    "1102": "cloud",
+    "1001": "clouds",
+    "2000": "wind",
+    "2100": "wind",
+    "4000": "raincloud",
+    "4001": "raincloud",
+    "4200": "heavyrain",
+    "4201": "heavyrain",
+    "5000": "snow",
+    "5001": "wind",
+    "5100": "snow",
+    "5101": "snow",
+    "6000": "snow",
+    "6001": "snow",
+    "6200": "snow",
+    "6201": "snow",
+    "7000": "snow",
+    "7101": "snow",
+    "7102": "snow",
+    "8000": "thundercloud"
+  };
 }

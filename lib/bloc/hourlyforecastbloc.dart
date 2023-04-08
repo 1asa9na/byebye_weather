@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HourlyForecastBloc extends Bloc<HFEvent, HFState> {
   HourlyForecastBloc()
-      : super(HourlyForecast('sun', 'Ясно', DateTime.now(), 20)) {
+      : super(HourlyForecast('sun', 'clouds', 'Ясно', DateTime.now(), 20)) {
     on<HFEvent>((event, emit) {
       return emit(HourlyForecast.fromJson(
           jsonDecode(event.prefs.getString('hourly')!)[event.index]));
@@ -22,6 +22,8 @@ class HFEvent {
 
 abstract class HFState {
   get forecastImage;
+  get forecastWord;
+  get forecastMainImage;
   get date;
   get temperature;
 }
