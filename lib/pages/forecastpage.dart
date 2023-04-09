@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:labtask/widgets/appbarcontainer.dart';
 import 'package:labtask/widgets/bottomnavigationbarcontainer.dart';
@@ -48,7 +48,13 @@ class ForecastPage extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          await initApp(prefs, await getCurrentLocation());
+          LocationPermission permission = await Geolocator.checkPermission();
+          if (permission == LocationPermission.denied) {
+            permission = await Geolocator.requestPermission();
+            if (permission != LocationPermission.denied) {
+              await initApp(prefs, await getCurrentLocation(permission));
+            }
+          }
         },
         child: CustomScrollView(
           slivers: [

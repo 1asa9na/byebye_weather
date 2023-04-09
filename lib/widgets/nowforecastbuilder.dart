@@ -27,7 +27,7 @@ class NowForecastBuilder extends StatelessWidget {
               ),
               const Spacer(),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
@@ -35,11 +35,13 @@ class NowForecastBuilder extends StatelessWidget {
                     children: [
                       Text(
                         '${state.temperature.round()}°',
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                             fontSize: 40, color: Colors.white),
                       ),
                       Text(
                         '${state.forecastWord}',
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                             fontSize: 20, color: Colors.white),
                       ),

@@ -17,8 +17,14 @@ Future<String> fetch(String request) async {
 void myApp() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('lastLocation', '42.3478, -71.0466');
-  String? loc = await getCurrentLocation();
-  if (loc == null) {
+  LocationPermission permission = await Geolocator.checkPermission();
+  String? loc = await getCurrentLocation(permission);
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+  }
+  print(loc);
+  print(permission);
+  if (loc == null || permission == LocationPermission.denied) {
     runApp(
       MaterialApp(home: ErrorLocationPage()),
     );
@@ -56,9 +62,8 @@ Future<void> initApp(SharedPreferences prefs, String? location) async {
   }
 }
 
-Future<String?> getCurrentLocation() async {
+Future<String?> getCurrentLocation(LocationPermission permission) async {
   final String? actualLocation;
-  LocationPermission permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
